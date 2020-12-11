@@ -18,6 +18,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @isset($state)
+        <script type="text/javascript">
+            // Set a initial state on the window object, to share accross all views
+            // Gettting data from the database
+
+            window.__INITIAL_STATE__ = "{!! addslashes(json_encode($state)) !!}"
+        </script>
+    @endisset
 </head>
 <body>
     <div id="app">

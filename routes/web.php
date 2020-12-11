@@ -51,41 +51,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Test file copy
-
-Route::get('copy', 'CopyFileController@copyFile');
-
-// Test view composer
-
-Route::get('/view/composer', 'HomeController@index');
-
-// sessions & cookies
-
-Route::get('/set-cookie', function (Request $request) {
-    $response = new Response('Response from cookie');
-    $response->withCookie(cookie('new-cookie', $request->path(), 1));
-
-    return $response;
-});
-
-Route::get('get-cookie', function (Request $request) {
-   $cookieValue = $request->cookie('new-cookie');
-
-   return response()->json($cookieValue);
-});
-
-Route::get('set-session', function (Request $request) {
-    return $request->session()->put('new-session', $request->ip());
-});
-
-Route::get('get-session', function (Request $request) {
-    return $request->session()->get('new-session');
-});
-
-Route::get('forget-session', function (Request $request) {
-   return $request->session()->forget('new-session');
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/users', 'UserController@index')->name('users.all');
+Route::get('/user/{id}', 'UserController@show')->name('user.show');

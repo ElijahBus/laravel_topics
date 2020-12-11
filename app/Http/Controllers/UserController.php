@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
 use App\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -15,7 +15,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        $state = array_merge(['path' => '/users'] , $users->toArray());
+
+        return view('user_info', ['state' => $state]);
     }
 
     /**
@@ -51,7 +54,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $state = array_merge(['path' => "/user/{$id}"], $user->toArray());
+
+        return view('user_info', ['state' => $state]);
     }
 
     /**
