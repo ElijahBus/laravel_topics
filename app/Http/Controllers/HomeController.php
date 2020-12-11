@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,15 +24,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $visitorId = $request->cookie('new-cookie') ?? '';
-
         $users = User::all();
         $userIp = $request->ip();
 
-        return view('home', compact('users'))->with([
-            'userIp' => $userIp,
-            'visitorId' => $visitorId
-        ]);
+        return view('home', compact('users'));
     }
 
 }
